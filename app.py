@@ -19,15 +19,15 @@ from routes.venta.venta import appventa
 
 
 app = Flask(__name__)
-app.secret_key = "Pinocho"
-app.config["SESSION_TYPE"] = "filesystem"
-app.config["SESSION_PERMANENT"] = False
+app.secret_key = "SK1234"
 app.register_blueprint(appusuario)
 app.register_blueprint(imageProducto)
 app.register_blueprint(appproducto)
 app.register_blueprint(appproveedor)
 app.register_blueprint(appventa)
 app.config.from_object(BaseConfig)
+app.config["SESSION_TYPE"] = "filesystem"
+app.config["SESSION_PERMANENT"] = False
 CORS(app)
 Session(app)
 bootstrap = Bootstrap(app)
@@ -47,45 +47,9 @@ admin.add_view(ModelView(Proveedor,db.session))
 @app.route('/inicio')
 @app.route('/index')
 def inicio():
-    user=""
-    return render_template('index.html', user = user)
-
-#@app.route('/')
-#@app.route('/inicio')
-#@app.route('/inicio.html')
-#def inicio():
-    #if 'username' in session:
-    #   return render_template('login.html')
-    #else:
-#        return render_template("inicio.html")
-
-#@app.route('/login' ,methods=['GET','POST'])
-#def login():
-#    if request.method == 'POST':
-#        form = request.form
-#        correoexist = Usuario.query.filter_by(correo=form['correo']).first()
-#        correo = request.form.get('correo')
-#        contraseña = request.form.get('contraseña')
-#        if correoexist:
-#            usuario=Usuario(nombreUsuario=form["nombreUsuario"],correo=form["correo"],contraseña=form["contraseña"],edad=form["edad"],admin=form["admin"])
-#        else:
-#            pass
-#    else:
-#        return render_template("login.html")
-
-#@app.route('/logout')
-#def logout():
-#    return redirect(url_for('inicio.html'))
+    return render_template('index.html')
 
 
-#@app.route('/admin/', methods=['GET','POST'])
-#def adminp():
-#    if request.method==["POST"]:
-#        print(request.form['correo'])
-#        print(request.form['contraseña'])
-#        return render_template("inicio.html")
-#    else:
-#        return render_template("inicio.html")
 
 @app.route('/auth/registro',methods=['POST'])
 def registro():
